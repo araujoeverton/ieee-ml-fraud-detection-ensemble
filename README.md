@@ -2,7 +2,7 @@
 
 
 
-<img align="right" src="https://raw.githubusercontent.com/araujoeverton/XP_Bootcamp_Engenharia_de_Dados/main/assets/Apache_kafka_wordtype.svg" width="200"/>
+<img align="right" src="https://raw.githubusercontent.com/araujoeverton/ieee-ml-fraud-detection-ensemble/cf1655fa9d788eee73c9130cb1160737e850170c/assets/python.svg" width="200"/>
 
 # Autorização de Uso
 ### 1. Salve uma cópia e utilize o material deste repositório para estudo!
