@@ -16,8 +16,8 @@ matplotlib>=3.7.0
 seaborn>=0.12.0
 
 # Performance & File Formats
-pyarrow  # Required for saving/loading .parquet files
-fastparquet # Alternative engine for parquet
+pyarrow
+fastparquet
 
 # Data Version Control
 dvc

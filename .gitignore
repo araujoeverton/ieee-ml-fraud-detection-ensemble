@@ -5,7 +5,12 @@
 *.bak
 
 # Data and Inputs (IEEE-CIS original files are huge)
-input/*
+# Ignora os arquivos pesados (CSV, Parquet, etc)
+input/*.csv
+input/*.parquet
+
+# Mas NÃO ignora os arquivos de metadados do DVC
+!input/*.dvc
 !input/.gitkeep
 processed_data/
 models/*.joblib

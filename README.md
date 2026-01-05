@@ -6,7 +6,7 @@
 
 # Usage Authorization
 ### 1. Save a copy and use the material in this repository for study purposes!
-<a href="https://github.com//araujoeverton/ieee-ml-fraud-detection-ensemble//fork">
+<a href="https://github.com/araujoeverton/ieee-ml-fraud-detection-ensemble/fork">
     <img alt="Folk" title="Fork Button" src="https://shields.io/badge/-DAR%20FORK-red.svg?&style=for-the-badge&logo=github&logoColor=white"/></a>
 
 
@@ -34,15 +34,46 @@ projeto_fraude/
 └── setup_remote.sh          # Root automation script for setup
 ```
 
-## 🔒 Security & Configuration
+## 🔒 🔒 Security & Infrastructure Setup
 
-This project uses **environment variables** to manage sensitive information, such as Google Drive Folder IDs. This prevents hardcoding credentials and ensures the project follows security best practices.
+To avoid 403 Access Denied errors and ensure production-grade security, this project uses a custom Google Cloud Project for DVC authentication.
 
-### The `.env.example` File
-I have provided a `.env.example` file to guide the setup:
-- **Duplicate** `.env.example` and rename it to `.env`.
-- **Fill** in your private `GDRIVE_FOLDER_ID`.
-- **Note:** The `.env` file is explicitly ignored by Git (see `.gitignore`) to prevent accidental leaks.
+### 1. Google Cloud Console Configuration
+
+Before running the project, you must generate your own OAuth 2.0 credentials:
+
+1. Go to the Google Cloud Console.
+
+2. Create a new project (e.g., ```DVC-Fraud-Storage```).
+
+3. Enable the ***Google Drive API***.
+
+4. Configure the ***OAuth Consent Screen*** as "External" and add your email as a ***Test User.***
+
+5. Create ***Credentials > OAuth 2.0 Client ID*** for "Desktop App".
+
+6. Copy your ```Client ID``` and ```Client Secret```.
+
+### 2. Environment Variables (.env)
+
+1. Copy ```.env.example``` to a new file named ```.env```.
+
+2. Fill in the following variables:
+
+. ```GDRIVE_FOLDER_ID```: The ID from your Google Drive folder URL.
+
+. ```GDRIVE_CLIENT_ID```: The ID generated in Google Cloud Console.
+
+. ```GDRIVE_CLIENT_SECRET```: The Secret generated in Google Cloud Console.
+
+### 3. Automated Setup
+
+Once your ```.env``` is ready, run the main setup script to link DVC with your custom credentials:
+
+```text
+chmod +x setup_remote.sh
+./setup_remote.sh
+```
 
 > [!IMPORTANT]
 > Never commit your real `.env` file. Recruiters: this setup ensures the project is portable and secure for team collaboration.
@@ -56,45 +87,26 @@ Ensure you are using Python 3.10+ (as seen in our PyCharm configuration). Instal
 pip install -r requirements.txt
 ```
 
-### 2. Secure Data Configuration (DVC)
-
-We use DVC to manage large datasets externally. To configure your remote storage securely:
-
-1. Copy `.env.example` to a new file named `.env`.
-
-2. Fill in your `GDRIVE_FOLDER_ID` in the `.env` file.
-
-3. Run the automated root script:
-
-```text
-chmod +x setup_remote.sh
-./setup_remote.sh
-```
 
 ## 📦 Data Management with DVC
 
 Since the IEEE-CIS dataset is too large for GitHub, I implemented **DVC (Data Version Control)**. This allows the repository to stay lightweight while maintaining full traceability of data versions.
 
-### 1. The Setup Flow (`setup_remote.sh`)
-The configuration is automated to ensure security and ease of use:
-- **Security**: The script reads your `GDRIVE_FOLDER_ID` from a local `.env` file (not tracked by Git).
-- **Automation**: By running `./setup_remote.sh`, the system activates the virtual environment, installs dependencies, and links DVC to your private Cloud Storage.
+***Storage Logic:*** Large files are stored as encrypted hashes on Google Drive to ensure version integrity.
 
-### 2. The Data Push (`dvc push`)
-Once the remote storage is configured, you can sync your local data with the cloud:
-- **How it works**: When you run `dvc add <file>`, DVC creates a lightweight `.dvc` pointer file.
-- **Pushing**: Running `dvc push` uploads the actual heavy files (CSVs, Parquets, Models) to Google Drive.
-- **Collaboration**: Anyone else with access can simply run `dvc pull` to get the exact same data versions without manually downloading from Kaggle.
+***Syncing:*** Use ```dvc push``` to upload local changes and dvc pull to download data.
+
+***Metadata:*** Only the ```.dvc``` pointer files are tracked by Git, keeping the repository lightweight.
 
 
 
 ### 🔄 Summary of Commands
-| Command | Purpose |
-| :--- | :--- |
-| `./setup_remote.sh` | One-time setup: links your `.env` secrets to DVC. |
-| `dvc add input/data.csv` | Tells DVC to track a large file. |
-| `dvc push` | Uploads tracked files to Google Drive. |
-| `dvc pull` | Downloads the data to a new machine. |
+| Command                          | Purpose |
+|:---------------------------------| :--- |
+| `./setup_remote.sh`              | One-time setup: links your `.env` secrets to DVC. |
+| `dvc add input/archive_name.csv` | Tells DVC to track a large file. |
+| `dvc push`                       | Uploads tracked files to Google Drive. |
+| `dvc pull`                       | Downloads the data to a new machine. |
 
 <div align="center">
   <p>
