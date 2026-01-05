@@ -4,9 +4,9 @@
 
 <img align="right" src="https://raw.githubusercontent.com/araujoeverton/ieee-ml-fraud-detection-ensemble/cf1655fa9d788eee73c9130cb1160737e850170c/assets/python.svg" width="120"/>
 
-# Autorização de Uso
-### 1. Salve uma cópia e utilize o material deste repositório para estudo!
-<a href="https://github.com//araujoeverton/XP_Bootcamp_Engenharia_de_Dados//fork">
+# Usage Authorization
+### 1. Save a copy and use the material in this repository for study purposes!
+<a href="https://github.com//araujoeverton/ieee-ml-fraud-detection-ensemble//fork">
     <img alt="Folk" title="Fork Button" src="https://shields.io/badge/-DAR%20FORK-red.svg?&style=for-the-badge&logo=github&logoColor=white"/></a>
 
 
@@ -34,7 +34,18 @@ projeto_fraude/
 └── setup_remote.sh          # Root automation script for setup
 ```
 
+## 🔒 Security & Configuration
 
+This project uses **environment variables** to manage sensitive information, such as Google Drive Folder IDs. This prevents hardcoding credentials and ensures the project follows security best practices.
+
+### The `.env.example` File
+I have provided a `.env.example` file to guide the setup:
+- **Duplicate** `.env.example` and rename it to `.env`.
+- **Fill** in your private `GDRIVE_FOLDER_ID`.
+- **Note:** The `.env` file is explicitly ignored by Git (see `.gitignore`) to prevent accidental leaks.
+
+> [!IMPORTANT]
+> Never commit your real `.env` file. Recruiters: this setup ensures the project is portable and secure for team collaboration.
 
 ## ⚙️ Setup & Installation
 ### 1. Environment & Dependencies
