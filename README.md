@@ -10,29 +10,55 @@
     <img alt="Folk" title="Fork Button" src="https://shields.io/badge/-DAR%20FORK-red.svg?&style=for-the-badge&logo=github&logoColor=white"/></a>
 
 
-## Detalhes da formação
+## Project Details
 
-A XP Investimentos investe em formação e conhecimento! Um dos bancos líderes de mercado e em inovação preparou o Bootcamp Engenheiro de Dados!
+This project implements a modular Machine Learning pipeline to detect fraudulent transactions using the IEEE-CIS dataset. It features a multi-model ensemble approach (LightGBM & XGBoost) with optimized memory management and categorical encoding.
 
-O objetivo é simples: Formar profissionais capazes de trabalhar com Engenharia de Dados na construção de pipelines de dados e em outras soluções de dados que requeiram etapas de coleta, preparação, armazenamento e processamento de dados.
+## 📁 Project Structure
 
-Conhecer as técnicas e tecnologias usadas na construção do pipeline de dados (data flow) que envolvem processos de coleta, preparação, armazenamento e acesso a dados, além da integração e combinação de diferentes fontes de dados.
+```text
+projeto_fraude/
+│
+├── setup/
+│   └── setup_remote.py      # Python logic for secure GDrive configuration
+├── src/
+│   ├── 01_preprocessing.py  # Data cleaning, Engineering & Encoding
+│   ├── 02_train_lgbm.py     # LightGBM training with K-Fold
+│   └── utils.py             # Memory reduction & shared helpers
+├── input/                   # Raw CSV data (Tracked by DVC)
+├── processed_data/          # Optimized .parquet files (Tracked by DVC)
+├── models/                  # Serialized models and encoders
+├── predictions/             # OOF and Test predictions for ensembling
+├── .env.example             # Template for secure environment variables
+├── requirements.txt         # Project dependencies
+└── setup_remote.sh          # Root automation script for setup
+```
 
-Durante dois meses, iremos imergir no mundo da engenharia de dados, e trazer uma solução real e completa, que abrande um projeto de streaming de dados com Apache Kafka!
-Seja muito bem vindo(a) a esta jornada!
-
-### Atividades:
-
-Aulas gravadas: As aulas são gravadas, divididas em 5 módulos que totalizam 32 horas de duração.
-
-Aulas interativas (Live): Momento em que você irá se inspirar nos talentos das empresas mais inovadoras do mundo, podendo interagir ao longo da live e até fazer perguntas sobre carreira e tecnologia.
-
-Desafio Final: Construção de um projeto End-to-End, utilizando o aclamado Apache Kafka.
 
 
+## ⚙️ Setup & Installation
+### 1. Environment & Dependencies
 
-### Repositório destinado à estudos e documentação do projeto de formação.
+Ensure you are using Python 3.10+ (as seen in our PyCharm configuration). Install all necessary libraries:
 
+```text
+pip install -r requirements.txt
+```
+
+### 2. Secure Data Configuration (DVC)
+
+We use DVC to manage large datasets externally. To configure your remote storage securely:
+
+1. Copy `.env.example` to a new file named `.env`.
+
+2. Fill in your `GDRIVE_FOLDER_ID` in the `.env` file.
+
+3. Run the automated root script:
+
+```text
+chmod +x setup_remote.sh
+./setup_remote.sh
+```
 
 <div align="center">
   <p>

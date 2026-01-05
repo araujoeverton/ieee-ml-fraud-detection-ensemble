@@ -1,2 +1,29 @@
-.idea
-*/input
+# PyCharm / IDEs
+.idea/
+.vscode/
+*.swp
+*.bak
+
+# Data and Inputs (IEEE-CIS original files are huge)
+input/*
+!input/.gitkeep
+processed_data/
+models/*.joblib
+models/*.pkl
+predictions/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env
+
+# Notebooks (Optional: ignores checkpoint folders)
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
